@@ -13,6 +13,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+.vscode/
 eggs/
 .eggs/
 lib/
