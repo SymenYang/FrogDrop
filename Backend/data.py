@@ -15,7 +15,7 @@ class FrogDropData(SingleClass) :
     broadcasterPort = 3524
     fileURI = ""
     fileName = ""
-    receiverList = [] #(IP,userName)
+    receiverList = {} #(IP,userName:last receive time)
     userName = ""
     
     fileBuffer = ""

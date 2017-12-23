@@ -11,7 +11,7 @@ class FrogProtocol() :
                 'SenderPort' in dicData and \
                 'Reciver' in dicData and \
                 'ReciverPort' in dicData and \
-                'URI' in dicData and) :
+                'URI' in dicData) :
             return {"error" : "don't have basic component"}
         
         if dicData['Method'] == 'PUT' :
