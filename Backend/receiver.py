@@ -94,11 +94,7 @@ def finishRecon(accept,nextfunc):
         filed.write(finaldata)
         nowPos += len(file)
         print(str(nowPos) + ' of ' + str(Data.fileSize) + ' received')
-<<<<<<< HEAD
     #s.close()
-=======
-    s.close()
->>>>>>> 1e0713b33bc7a5e16295cf83a93ba58303758f50
     filed.close()
     if nextfunc != None:
         nextfunc()
