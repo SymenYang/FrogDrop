@@ -74,8 +74,4 @@ def sendFile(nextfunc = None):
 if __name__ == '__main__':
     Data = DT.FrogDropData()
     Data.initial()
-<<<<<<< HEAD
     startSend('10.221.123.249','../test.log',sendFile)
-=======
-    startSend('10.221.123.249','test.log',sendFile)
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09

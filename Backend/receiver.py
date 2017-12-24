@@ -71,17 +71,11 @@ def finishRecon(accept,nextfunc):
         s.send(PT.getTrsString(reqDic))
         data = s.recv(65535)
         s.close()
-<<<<<<< HEAD
         if nextfunc != None:
             nextfunc()
         return
     nowPos = 0
     filed = open(Data.downloadDir + Data.fileName,'wb')
-=======
-        return
-    nowPos = 0
-    filed = open(Data.downloadDir + Data.fileName,'w')
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     while nowPos <= Data.fileSize:
         reqDic['Size'] = size
         if size + nowPos > Data.fileSize:
@@ -93,15 +87,10 @@ def finishRecon(accept,nextfunc):
             break
         resDic = PT.loadFromString(data)
         file = resDic['File']
-<<<<<<< HEAD
         finaldata = base64.b64decode(file)
         filed.write(finaldata)
         nowPos += len(file)
         print(str(nowPos) + ' of ' + str(Data.fileSize) + ' received')
-=======
-        filed.write(file)
-        nowPos += len(file)
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     s.close()
     filed.close()
     if nextfunc != None:
@@ -113,10 +102,6 @@ def accept():
 if __name__ == '__main__':
     Data = DT.FrogDropData()
     Data.initial()
-<<<<<<< HEAD
     startListen(accept)
     Timer = threading.Timer(15,stopListen)
     Timer.start()
-=======
-    listen(accept)
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
