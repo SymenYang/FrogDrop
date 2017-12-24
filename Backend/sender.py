@@ -3,23 +3,15 @@ import protocol as PT
 import thread
 import threading
 import socket
-<<<<<<< HEAD
 import base64
-=======
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
 
 def startSend(IPaddr,fileURI,nextfunc):
     Data = DT.FrogDropData()
     Data.reqIP = IPaddr
     Data.fileURI = fileURI
-<<<<<<< HEAD
     fd = open(fileURI,'rb')
     statrbuffer = fd.read()
     Data.fileBuffer = base64.b64encode(statrbuffer).decode('utf-8')
-=======
-    fd = open(fileURI,'r')
-    Data.fileBuffer = fd.read()
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     Data.fileSize = len(Data.fileBuffer)
     reqDic = {'Method' : 'PUT',\
               'Sender' : Data.selfIP,\
@@ -29,11 +21,7 @@ def startSend(IPaddr,fileURI,nextfunc):
               'URI' : Data.fileURI,\
               'UserName' : Data.userName,\
               'Size' : Data.fileSize}
-<<<<<<< HEAD
     print(reqDic)
-=======
-    
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.connect((Data.reqIP,36500))
@@ -77,11 +65,8 @@ def sendFile(nextfunc = None):
                   'Size' : recDic['Size']}
         resDic['File'] = Data.fileBuffer[recDic['StartPos']:recDic['StartPos'] + recDic['Size']]
         conn.send(PT.getTrsString(resDic))
-<<<<<<< HEAD
         sended = recDic['StartPos'] + recDic['Size']
         print (str(sended) + ' of ' + str(Data.fileSize) + ' sended')
-=======
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     conn.close()
     if nextfunc != None:
         nextfunc()

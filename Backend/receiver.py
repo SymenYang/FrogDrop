@@ -3,7 +3,6 @@ import protocol as PT
 import thread
 import threading
 import socket
-<<<<<<< HEAD
 import base64
 
 
@@ -20,15 +19,10 @@ def stopListen():
 
 def listen(nextfunc,sth = None):
     global stopReceive
-=======
-
-def listen(nextfunc):
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     Data = DT.FrogDropData()
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((Data.selfIP,36500))
-<<<<<<< HEAD
     print('listening at ' + Data.selfIP + ':36500')
     while not stopReceive:
         s.settimeout(5)
@@ -61,34 +55,6 @@ def listen(nextfunc):
 
 def finishRecon(accept,nextfunc):
     Data = DT.FrogDropData()
-=======
-    s.listen(5)
-    print('listening at ' + Data.selfIP + ':36500')
-    conn,addr = s.accept()
-    recived = conn.recv(65535)
-    recivedData = PT.loadFromString(recived)
-    Data.fileURI = recivedData['URI']
-    fileSplit = Data.fileURI.split('/')
-    Data.fileName = fileSplit[len(fileSplit) - 1]
-    Data.fileSize = recivedData['Size']
-    Data.reqName = recivedData['UserName']
-    Data.reqIP = recivedData['Sender']
-    resDic = {"Method" : "REC",\
-              "Sender" : Data.selfIP,\
-              "SenderPort" : 36500,\
-              "Receiver" : Data.reqIP,\
-              "ReceiverPort" : recivedData['SenderPort'],\
-              "URI" : recivedData['URI'],\
-              "UserName" : Data.userName}
-    resString = PT.getTrsString(resDic)
-    conn.send(resString)
-    if nextfunc != None:
-        nextfunc()
-
-def finishRecon(accept,nextfunc):
-    Data = DT.FrogDropData()
-    times = Data.fileSize / 32768 + 1
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     size = 32768
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
