@@ -13,11 +13,15 @@ class SingleClass(object):
 class FrogDropData(SingleClass) : 
     selfIP = "127.0.0.1"
     broadcasterPort = 3524
+    downloadDir = ""
     fileURI = ""
     fileName = ""
+    fileSize = 0
     receiverList = {} #((IP,userName):last receive time)
     userName = ""
-    
+    reqName = ""
+    reqIP = ""
+
     fileBuffer = ""
     userNameFile = "userinfo.log"
 

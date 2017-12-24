@@ -25,8 +25,8 @@
 1. Method : PUT/REC/GET/TRS (String)
 2. Sender : IP
 3. SenderPort : Port
-4. Reciver : IP
-5. ReciverPort : Port
+4. Receiver : IP
+5. ReceiverPort : Port
 6. URI : String
 7. UserName : String
 8. Size : Int
@@ -41,8 +41,8 @@
     Method : PUT,
     Sender : aaa.aaa.aaa.aaa,
     SenderPort : xxxxx(use 36500),
-    Reciver : bbb.bbb.bbb.bbb,
-    ReciverPort : xxxxx(use 36500),
+    Receiver : bbb.bbb.bbb.bbb,
+    ReceiverPort : xxxxx(use 36500),
     URI : xxx/xxx/xxx.xxx,
     UserName : cccc,
     Size : xxxxx
@@ -55,8 +55,8 @@
     Method : REC,
     Sender : bbb.bbb.bbb.bbb,
     SenderPort : xxxxx(use 36500),
-    Reciver : aaa.aaa.aaa.aaa,
-    ReciverPort : xxxxx(use 36500),
+    Receiver : aaa.aaa.aaa.aaa,
+    ReceiverPort : xxxxx(use 36500),
     URI : xxx/xxx/xxx.xxx,
     UserName : dddd
 }
@@ -68,8 +68,8 @@
     Method : GET,
     Sender : bbb.bbb.bbb.bbb,
     SenderPort : xxxxx(use 36501),
-    Reciver : aaa.aaa.aaa.aaa,
-    ReciverPort : xxxxx(use 36501),
+    Receiver : aaa.aaa.aaa.aaa,
+    ReceiverPort : xxxxx(use 36501),
     URI : xxx/xxx/xxx.xxx,
     StartPos: xxxx,
     Size : xxxx
@@ -82,8 +82,8 @@
     Method : TRS,
     Sender : aaa.aaa.aaa.aaa,
     SenderPort : xxxxx(use 36501),
-    Reciver : bbb.bbb.bbb.bbb,
-    ReciverPort : xxxxx(use 36501),
+    Receiver : bbb.bbb.bbb.bbb,
+    ReceiverPort : xxxxx(use 36501),
     URI : xxx/xxx/xxx.xxx,
     Size : xxxx,
     File : 01010101...

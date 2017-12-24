@@ -10,11 +10,11 @@ stop = False
 def broadcast():
     global stop
     if stop:
-        print('stopped')
+        print('broadcast stopped')
         return
     else:
         pass
-    print("sended")
+    #print("sended")
     data = DT.FrogDropData()
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)

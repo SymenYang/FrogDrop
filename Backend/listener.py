@@ -23,23 +23,24 @@ def listen():
     universalData = DT.FrogDropData()
     universalData.receiverList.clear()
     while not listenStop:
-        print('once')
+        #print('once')
         s.settimeout(5.0)
         try:
             data, address = s.recvfrom(65535)
-            print('Server received from {}:{}'.format(address, data.decode('utf-8')))
+            #print('Server received from {}:{}'.format(address, data.decode('utf-8')))
             tempDic = json.loads(data.decode('utf-8'))
             IPaddr = address[0]
             nowtime = time.time()
             userName = tempDic['UserName']
             universalData.receiverList[(IPaddr,userName)] = nowtime
         except:
-            print('time out')
+            pass
+            #print('time out')
         nowtime = time.time()
         poplist = []
         for key in universalData.receiverList:
             if (nowtime - universalData.receiverList[key]) >= 15:
-                print (key)
+                #print (key)
                 poplist.append(key)
         for key in poplist:
             universalData.receiverList.pop(key)
