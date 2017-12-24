@@ -14,7 +14,7 @@ def recon():
     RC.finishRecon(accept,restartListen)
 
 def restartListen():
-    RC.stratListen(recon)
+    RC.startListen(recon)
 
 def choose():
     print\

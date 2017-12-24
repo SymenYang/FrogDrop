@@ -29,10 +29,12 @@ def listen(nextfunc,sth = None):
         try:
             s.listen(5)
             conn,addr = s.accept()
+            conn.setblocking(1)
             recived = conn.recv(65535)
             recivedData = PT.loadFromString(recived)
             Data.fileURI = recivedData['URI']
-            fileSplit = Data.fileURI.split('/')
+            temp = Data.fileURI.replace('\\','/')
+            fileSplit = temp.split('/')
             Data.fileName = fileSplit[len(fileSplit) - 1]
             Data.fileSize = recivedData['Size']
             Data.reqName = recivedData['UserName']
@@ -46,16 +48,17 @@ def listen(nextfunc,sth = None):
                       "UserName" : Data.userName}
             resString = PT.getTrsString(resDic)
             conn.send(resString)
+            conn.close()
             if nextfunc != None:
                 nextfunc()
-                break
+                return
         except:
             pass
             #print('recive time out')
 
 def finishRecon(accept,nextfunc):
     Data = DT.FrogDropData()
-    size = 32768
+    size = 1024
     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.connect((Data.reqIP,36501))
@@ -71,17 +74,11 @@ def finishRecon(accept,nextfunc):
         s.send(PT.getTrsString(reqDic))
         data = s.recv(65535)
         s.close()
-<<<<<<< HEAD
         if nextfunc != None:
             nextfunc()
         return
     nowPos = 0
     filed = open(Data.downloadDir + Data.fileName,'wb')
-=======
-        return
-    nowPos = 0
-    filed = open(Data.downloadDir + Data.fileName,'w')
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
     while nowPos <= Data.fileSize:
         reqDic['Size'] = size
         if size + nowPos > Data.fileSize:
@@ -93,16 +90,11 @@ def finishRecon(accept,nextfunc):
             break
         resDic = PT.loadFromString(data)
         file = resDic['File']
-<<<<<<< HEAD
         finaldata = base64.b64decode(file)
         filed.write(finaldata)
         nowPos += len(file)
         print(str(nowPos) + ' of ' + str(Data.fileSize) + ' received')
-=======
-        filed.write(file)
-        nowPos += len(file)
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09
-    s.close()
+    #s.close()
     filed.close()
     if nextfunc != None:
         nextfunc()
@@ -113,10 +105,6 @@ def accept():
 if __name__ == '__main__':
     Data = DT.FrogDropData()
     Data.initial()
-<<<<<<< HEAD
     startListen(accept)
     Timer = threading.Timer(15,stopListen)
     Timer.start()
-=======
-    listen(accept)
->>>>>>> 4872dface877726e14b5620c4e233b8c91f59a09

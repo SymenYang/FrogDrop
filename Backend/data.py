@@ -25,6 +25,16 @@ class FrogDropData(SingleClass) :
     fileBuffer = ""
     userNameFile = "userinfo.log"
 
+    def get_host_ip(self):
+        ip = ""
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(('1.1.1.1', 80))
+            ip = s.getsockname()[0]
+        finally:
+            s.close()
+        return ip
+
     def initial(self):
         '''
         initial data from self.userNameFile and system info
