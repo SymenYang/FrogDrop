@@ -27,7 +27,7 @@ def broadcast():
 	msg = '{"program":"FrogDrop","UserName":"' + data.userName + '"}'
 	s.sendto(msg.encode(), (network, port))
 	global timer
-	timer = threading.Timer(10, broadcast)
+	timer = threading.Timer(5, broadcast)
 	timer.start()
 
 
@@ -46,5 +46,5 @@ def stopBroadcast():
 
 if __name__ == '__main__':
 	startBroadcast()
-	stopTimer = threading.Timer(15, stopBroadcast)
+	stopTimer = threading.Timer(5, stopBroadcast)
 	stopTimer.start()

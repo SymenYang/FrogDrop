@@ -15,17 +15,18 @@ class SingleClass(object):
 class FrogDropData(SingleClass):
 	selfIP = "127.0.0.1"
 	broadcasterPort = 3524
-	downloadDir = ""
+	downloadDir = "../received/"
 	fileURI = ""
 	fileName = ""
 	fileSize = 0
-	receiverList = {}  # ((IP,userName):last receive time)
+	sentSize = 0
+	receiverList = {}  # (IP: (userName,last receive time)
 	userName = ""
 	reqName = ""
 	reqIP = ""
 
 	fileBuffer = ""
-	userNameFile = "userinfo.log"
+	userNameFile = "../log/userinfo.log"
 
 	def get_host_ip(self):
 		ip = ""
@@ -65,7 +66,11 @@ class FrogDropData(SingleClass):
 		userinfofd.write(json.dumps(tempDic))
 		userinfofd.close()
 
+	def setNewName(self, newname):
+		self.userName = newname
 
-data = FrogDropData()
-data.initial()
-data.save()
+
+if __name__ == '__main__':
+	data = FrogDropData()
+	data.initial()
+	data.save()

@@ -36,14 +36,14 @@ def listen():
 			IPaddr = address[0]
 			nowtime = time.time()
 			userName = tempDic['UserName']
-			universalData.receiverList[(IPaddr, userName)] = nowtime
+			universalData.receiverList[IPaddr] = (userName, nowtime)
 		except:
 			pass
 			# print('time out')
 		nowtime = time.time()
 		poplist = []
 		for key in universalData.receiverList:
-			if (nowtime - universalData.receiverList[key]) >= 15:
+			if (nowtime - universalData.receiverList[key][1]) >= 15:
 				# print (key)
 				poplist.append(key)
 		for key in poplist:

@@ -39,8 +39,8 @@ def choosesend():
 	count = 0
 	IPList = []
 	for item in Data.receiverList:
-		print (str(count) + ' ' + item[1])
-		IPList.append(item[0])
+		print (str(count) + ' ' + Data.receiverList[item][0])
+		IPList.append(item)
 		count += 1
 	ans = input('input the number you want to send to: ')
 	num = int(ans)
@@ -64,10 +64,10 @@ def main():
 			break
 		if ans == 2:
 			newName = input('input new name: ')
-			Data.userName = newName
+			Data.setNewName(newName)
 		if ans == 1:
 			for item in Data.receiverList:
-				print (item[1])
+				print (Data.receiverList[item][0])
 		if ans == 0:
 			choosesend()
 

@@ -45,12 +45,12 @@ def listen(nextfunc, sth=None):
 			Data.fileSize = receivedData['Size']
 			Data.reqName = receivedData['UserName']
 			Data.reqIP = receivedData['Sender']
-			resDic = {"Method": "REC", \
-			          "Sender": Data.selfIP, \
-			          "SenderPort": 36500, \
-			          "Receiver": Data.reqIP, \
-			          "ReceiverPort": receivedData['SenderPort'], \
-			          "URI": receivedData['URI'], \
+			resDic = {"Method": "REC",
+			          "Sender": Data.selfIP,
+			          "SenderPort": 36500,
+			          "Receiver": Data.reqIP,
+			          "ReceiverPort": receivedData['SenderPort'],
+			          "URI": receivedData['URI'],
 			          "UserName": Data.userName}
 			resString = PT.getTrsString(resDic)
 			conn.send(resString.encode())
@@ -60,7 +60,7 @@ def listen(nextfunc, sth=None):
 				return
 		except:
 			pass
-		# print('recive time out')
+	# print('receive time out')
 
 
 def finishRecon(accept, nextfunc):
@@ -69,13 +69,13 @@ def finishRecon(accept, nextfunc):
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 	s.connect((Data.reqIP, 36501))
-	reqDic = {"Method": "GET", \
-	          "Sender": Data.selfIP, \
-	          "SenderPort": 36501, \
-	          "Receiver": Data.reqIP, \
-	          "ReceiverPort": 36501, \
-	          "URI": Data.fileURI, \
-	          "StartPos": 0, \
+	reqDic = {"Method": "GET",
+	          "Sender": Data.selfIP,
+	          "SenderPort": 36501,
+	          "Receiver": Data.reqIP,
+	          "ReceiverPort": 36501,
+	          "URI": Data.fileURI,
+	          "StartPos": 0,
 	          "Size": 0}
 	if not accept:
 		s.send(PT.getTrsString(reqDic).encode())

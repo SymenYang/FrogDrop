@@ -7,6 +7,12 @@ import threading
 import socket
 import base64
 
+# for ui's use
+stopFlag = False
+SD_WAIT = 0
+SD_YES = 1
+SD_NO = 2
+acceptFlag = SD_WAIT
 
 def startSend(IPaddr, fileURI, nextfunc):
 	Data = DT.FrogDropData()
@@ -47,12 +53,10 @@ def sendFile(nextfunc=None):
 		conn, addr = s.accept()
 		if addr[0] == Data.reqIP:
 			break
+
 	stopFlag = False
 	while not stopFlag:
 		received = conn.recv(65535).decode('utf-8')
-		print('---')
-		print('received', type(received), received)
-		print('---')
 		recDic = PT.loadFromString(received)
 		if 'error' in recDic:
 			print('protocol error')
@@ -61,8 +65,10 @@ def sendFile(nextfunc=None):
 			print('URI not match')
 			break
 		if recDic['Size'] == 0:
+			acceptFlag = SD_NO
 			print('Finished')
 			break
+		acceptFlag = SD_YES
 		resDic = {'Method': 'TRS', \
 		          'Sender': Data.selfIP, \
 		          'SenderPort': 36501, \
@@ -72,8 +78,8 @@ def sendFile(nextfunc=None):
 		          'Size': recDic['Size']}
 		resDic['File'] = Data.fileBuffer[recDic['StartPos']:recDic['StartPos'] + recDic['Size']]
 		conn.send(PT.getTrsString(resDic).encode())
-		sent = recDic['StartPos'] + recDic['Size']
-		print (str(sent) + ' of ' + str(Data.fileSize) + ' sent')
+		Data.sentSize = recDic['StartPos'] + recDic['Size']
+		print (str(Data.sentSize) + ' of ' + str(Data.fileSize) + ' sent')
 	conn.close()
 	if nextfunc != None:
 		nextfunc()
