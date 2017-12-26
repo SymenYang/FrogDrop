@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '..')
 from BackEnd import data as DT
 from BackEnd import broadcaster as BC
 from BackEnd import protocol

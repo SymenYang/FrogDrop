@@ -1,22 +1,19 @@
-from BackEnd import data as DT
-from BackEnd import protocol as PT
-from BackEnd import broadcaster as BC
-from BackEnd import listener as LT
-from BackEnd import sender as SD
-from BackEnd import receiver as RC
+import sys
+sys.path.insert(0, '..')
+from BackEnd import data, protocol, broadcaster, listener, sender, receiver
 import os
 
 
 def recon():
-	ans = input('Do you want to receive ' + Data.fileName + ' sended from ' + Data.reqName + ' ?(y/n)')
+	ans = input('Do you want to receive ' + Data.fileName + ' sent from ' + Data.reqName + ' ?(y/n)')
 	accept = False
 	if ans == 'y':
 		accept = True
-	RC.finishRecon(accept, restartListen)
+	receiver.finishRecon(accept, restartListen)
 
 
 def restartListen():
-	RC.startListen(recon)
+	receiver.startListen(recon)
 
 
 def choose():
@@ -50,22 +47,17 @@ def choosesend():
 	if num >= 0 and num < count:
 		filename = input('input the file URI you want to send: ')
 		if os.path.exists(filename):
-			SD.startSend(IPList[num], filename, SD.sendFile)
+			sender.startSend(IPList[num], filename, sender.sendFile)
 		else:
 			print("file doesn't exists")
 
 
 def main():
-	Data = DT.FrogDropData()
-	Data.initial()
-	BC.startBroadcast()
-	LT.startListen()
-	RC.startListen(recon)
 	while True:
 		ans = choose()
 		if ans == 3:
-			BC.stopBroadcast()
-			LT.stopListen()
+			broadcaster.stopBroadcast()
+			listener.stopListen()
 			Data.save()
 			print('exit')
 			exit(0)
@@ -81,4 +73,9 @@ def main():
 
 
 if __name__ == '__main__':
+	Data = data.FrogDropData()
+	Data.initial()
+	broadcaster.startBroadcast()
+	listener.startListen()
+	receiver.startListen(recon)
 	main()

@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '..')
 from BackEnd import data as DT
 from BackEnd import protocol as PT
 # import thread
@@ -26,7 +28,7 @@ def startSend(IPaddr, fileURI, nextfunc):
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 	s.connect((Data.reqIP, 36500))
-	s.send(PT.getTrsString(reqDic))
+	s.send(PT.getTrsString(reqDic).encode())
 	data = s.recv(65535)
 	resDic = PT.loadFromString(data)
 	if nextfunc != None:
@@ -47,7 +49,10 @@ def sendFile(nextfunc=None):
 			break
 	stopFlag = False
 	while not stopFlag:
-		received = conn.recv(65535)
+		received = conn.recv(65535).decode('utf-8')
+		print('')
+		print('received', type(received), received)
+		print('')
 		recDic = PT.loadFromString(received)
 		if 'error' in recDic:
 			print('protocol error')
@@ -67,8 +72,8 @@ def sendFile(nextfunc=None):
 		          'Size': recDic['Size']}
 		resDic['File'] = Data.fileBuffer[recDic['StartPos']:recDic['StartPos'] + recDic['Size']]
 		conn.send(PT.getTrsString(resDic))
-		sended = recDic['StartPos'] + recDic['Size']
-		print (str(sended) + ' of ' + str(Data.fileSize) + ' sended')
+		sent = recDic['StartPos'] + recDic['Size']
+		print (str(sent) + ' of ' + str(Data.fileSize) + ' sent')
 	conn.close()
 	if nextfunc != None:
 		nextfunc()

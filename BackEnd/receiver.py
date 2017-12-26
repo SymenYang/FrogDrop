@@ -1,3 +1,6 @@
+import sys
+
+sys.path.insert(0, '..')
 from BackEnd import data as DT
 from BackEnd import protocol as PT
 import _thread as thread
@@ -33,31 +36,31 @@ def listen(nextfunc, sth=None):
 			s.listen(5)
 			conn, addr = s.accept()
 			conn.setblocking(1)
-			recived = conn.recv(65535)
-			recivedData = PT.loadFromString(recived)
-			Data.fileURI = recivedData['URI']
+			received = conn.recv(65535).decode('utf-8')
+			receivedData = PT.loadFromString(received)
+			Data.fileURI = receivedData['URI']
 			temp = Data.fileURI.replace('\\', '/')
 			fileSplit = temp.split('/')
 			Data.fileName = fileSplit[len(fileSplit) - 1]
-			Data.fileSize = recivedData['Size']
-			Data.reqName = recivedData['UserName']
-			Data.reqIP = recivedData['Sender']
+			Data.fileSize = receivedData['Size']
+			Data.reqName = receivedData['UserName']
+			Data.reqIP = receivedData['Sender']
 			resDic = {"Method": "REC", \
 			          "Sender": Data.selfIP, \
 			          "SenderPort": 36500, \
 			          "Receiver": Data.reqIP, \
-			          "ReceiverPort": recivedData['SenderPort'], \
-			          "URI": recivedData['URI'], \
+			          "ReceiverPort": receivedData['SenderPort'], \
+			          "URI": receivedData['URI'], \
 			          "UserName": Data.userName}
 			resString = PT.getTrsString(resDic)
-			conn.send(resString)
+			conn.send(resString.encode())
 			conn.close()
 			if nextfunc != None:
 				nextfunc()
 				return
 		except:
 			pass
-			# print('recive time out')
+		# print('recive time out')
 
 
 def finishRecon(accept, nextfunc):

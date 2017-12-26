@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '..')
 from BackEnd import data as DT
 from BackEnd import protocol
 # import thread
@@ -15,7 +17,7 @@ def broadcast():
 		return
 	else:
 		pass
-	# print("sended")
+	# print("sent")
 	data = DT.FrogDropData()
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
