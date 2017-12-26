@@ -50,9 +50,9 @@ def sendFile(nextfunc=None):
 	stopFlag = False
 	while not stopFlag:
 		received = conn.recv(65535).decode('utf-8')
-		print('')
+		print('---')
 		print('received', type(received), received)
-		print('')
+		print('---')
 		recDic = PT.loadFromString(received)
 		if 'error' in recDic:
 			print('protocol error')
@@ -71,7 +71,7 @@ def sendFile(nextfunc=None):
 		          'URI': Data.fileURI, \
 		          'Size': recDic['Size']}
 		resDic['File'] = Data.fileBuffer[recDic['StartPos']:recDic['StartPos'] + recDic['Size']]
-		conn.send(PT.getTrsString(resDic))
+		conn.send(PT.getTrsString(resDic).encode())
 		sent = recDic['StartPos'] + recDic['Size']
 		print (str(sent) + ' of ' + str(Data.fileSize) + ' sent')
 	conn.close()

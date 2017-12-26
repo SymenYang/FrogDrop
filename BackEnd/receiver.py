@@ -78,8 +78,8 @@ def finishRecon(accept, nextfunc):
 	          "StartPos": 0, \
 	          "Size": 0}
 	if not accept:
-		s.send(PT.getTrsString(reqDic))
-		data = s.recv(65535)
+		s.send(PT.getTrsString(reqDic).encode())
+		data = s.recv(65535).decode('utf-8')
 		s.close()
 		if nextfunc != None:
 			nextfunc()
@@ -91,8 +91,8 @@ def finishRecon(accept, nextfunc):
 		if size + nowPos > Data.fileSize:
 			reqDic['Size'] = Data.fileSize - nowPos
 		reqDic['StartPos'] = nowPos
-		s.send(PT.getTrsString(reqDic))
-		data = s.recv(65535)
+		s.send(PT.getTrsString(reqDic).encode())
+		data = s.recv(65535).decode('utf-8')
 		if nowPos == Data.fileSize:
 			break
 		resDic = PT.loadFromString(data)
