@@ -1,9 +1,9 @@
-import data as DT
-import protocol as PT
-import broadcaster as BC
-import listener as LT
-import sender as SD
-import receiver as RC
+from BackEnd import data as DT
+from BackEnd import protocol as PT
+from BackEnd import broadcaster as BC
+from BackEnd import listener as LT
+from BackEnd import sender as SD
+from BackEnd import receiver as RC
 import os
 
 
@@ -55,7 +55,7 @@ def choosesend():
 			print("file doesn't exists")
 
 
-if __name__ == '__main__':
+def main():
 	Data = DT.FrogDropData()
 	Data.initial()
 	BC.startBroadcast()
@@ -78,3 +78,7 @@ if __name__ == '__main__':
 				print (item[1])
 		if ans == 0:
 			choosesend()
+
+
+if __name__ == '__main__':
+	main()

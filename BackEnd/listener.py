@@ -1,6 +1,6 @@
-import data as DT
-import broadcaster as BC
-import protocol
+from BackEnd import data as DT
+from BackEnd import broadcaster as BC
+from BackEnd import protocol
 import socket
 import _thread as thread
 import json
