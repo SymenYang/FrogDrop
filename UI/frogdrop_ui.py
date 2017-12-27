@@ -70,7 +70,7 @@ class Ui_FrogDrop(object):
 
     def retranslateUi(self, FrogDrop):
         _translate = QtCore.QCoreApplication.translate
-        FrogDrop.setWindowTitle(_translate("FrogDrop", "MainWindow"))
+        FrogDrop.setWindowTitle(_translate("FrogDrop", "FrogDrop"))
         self.ChooseBtn.setText(_translate("FrogDrop", "Choose"))
         self.RefreshBtn.setText(_translate("FrogDrop", "Refresh"))
         self.RecHeadline.setText(_translate("FrogDrop", "Choose your receiver:)"))
