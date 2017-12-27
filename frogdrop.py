@@ -64,7 +64,7 @@ class FrogDrop(QtWidgets.QMainWindow, Ui_FrogDrop):
 			ip = self.RecTable.item(cur_row, 0).text()
 			print(ip)
 		except:
-			QMessageBox.warning(self, 'WARNING', 'You are sending to ghost:)', QMessageBox.Ok)
+			QMessageBox.warning(self, 'WARNING', 'You are sending to a ghost:)', QMessageBox.Ok)
 			return
 
 		send_dg = SendDialog(ip)

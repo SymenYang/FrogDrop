@@ -104,3 +104,4 @@ ENV/
 .mypy_cache/
 /testdata.h5
 /received/
+log/

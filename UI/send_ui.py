@@ -24,6 +24,9 @@ class Ui_SendDialog(object):
         self.SendBtn.setObjectName("SendBtn")
         self.SendLog = QtWidgets.QLabel(SendDialog)
         self.SendLog.setGeometry(QtCore.QRect(16, 56, 209, 16))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.SendLog.setFont(font)
         self.SendLog.setText("")
         self.SendLog.setObjectName("SendLog")
 

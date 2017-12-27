@@ -16,6 +16,8 @@ class FrogDropData(SingleClass):
 	selfIP = "127.0.0.1"
 	broadcasterPort = 3524
 	downloadDir = "../received/"
+	if not os.path.isdir(downloadDir):
+		os.mkdir(downloadDir)
 	fileURI = ""
 	fileName = ""
 	fileSize = 0
@@ -26,6 +28,8 @@ class FrogDropData(SingleClass):
 	reqIP = ""
 
 	fileBuffer = ""
+	if not os.path.isdir('../log/'):
+		os.mkdir('../log/')
 	userNameFile = "../log/userinfo.log"
 
 	def get_host_ip(self):
