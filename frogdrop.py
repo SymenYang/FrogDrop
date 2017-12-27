@@ -23,9 +23,9 @@ class FrogDrop(QtWidgets.QMainWindow, Ui_FrogDrop):
 		self.EditBtn.clicked.connect(self.rename)
 		self.__received_signal.connect(self.show_Message_Box)
 
-		self.LogoPic.setPixmap(QtGui.QPixmap('../images/logo_tmp.jpg'))
+		self.LogoPic.setPixmap(QtGui.QPixmap('images/logo_tmp.jpg'))
 		self.LogoPic.setScaledContents(True)
-		self.HeadPic.setPixmap(QtGui.QPixmap('../images/pika.jpg'))
+		self.HeadPic.setPixmap(QtGui.QPixmap('images/pika.jpg'))
 		self.HeadPic.setScaledContents(True)
 
 		self.refresh()
